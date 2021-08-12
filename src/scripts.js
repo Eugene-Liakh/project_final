@@ -1,12 +1,11 @@
+import { SwipeEventListener } from "swipe-event-listener";
+
 const toggle = document.getElementById("dark-toggle");
 const body = document.getElementById("body");
 const header = document.getElementById("header");
 const sidePanel = document.getElementById("sidepanel");
 const btn = document.getElementById("button");
 const task = document.querySelectorAll(".task-text");
-
-// import { SwipeEventListener } from "swipe-event-listener";
-// const SwipeListener = require("swipe-listener");
 
 toggle.addEventListener("change", (event) => {
   if (event.target.checked) {
@@ -28,48 +27,33 @@ toggle.addEventListener("change", (event) => {
   }
 });
 
+btn.onclick = newTask;
 function newTask() {
   let newTask = document.createElement("div");
   newTask.className = "task";
   newTask.innerHTML =
     "<div><span>Lorem ipsum dolor sit amet consectetur adi</span></div>";
-  let parentEl = btn;
-  parentEl.insertAdjacentElement("afterend", newTask);
+
+  btn.insertAdjacentElement("afterend", newTask);
 }
-newTask();
-// function swipeCheck() {
-//   task.forEach((element) => {
-//     element.addEventListener("swipe", function (e) {
-//       console.log("swipe");
-//     });
-//   });
-// }
 
-// swipeCheck(task);
+// swipe functions
 
-// example
+const { swipeArea, updateOptions } = SwipeEventListener({
+  swipeArea: document.querySelector("body"),
+});
 
-// const { swipeArea, updateOptions } = SwipeEventListener({
-//   swipeArea: document.querySelector("body"),
-// });
+swipeArea.addEventListener("swipeDown", () => {
+  console.log("swipe down");
+});
+swipeArea.addEventListener("swipeUp", () => {
+  console.log("swipe up");
+});
 
-// // swipeArea.forEach((element) => {
-// //   element.addEventListener("swipeDown", () => {
-// //     console.log("swipe down");
-// //   });
-// // });
+swipeArea.addEventListener("swipeLeft", () => {
+  console.log("swipe left");
+});
 
-// swipeArea.addEventListener("swipeDown", () => {
-//   console.log("swipe down");
-// });
-// swipeArea.addEventListener("swipeUp", () => {
-//   console.log("swipe up");
-// });
-
-// swipeArea.addEventListener("swipeLeft", () => {
-//   console.log("swipe left");
-// });
-
-// swipeArea.addEventListener("swipeRight", () => {
-//   console.log("swipe right");
-// });
+swipeArea.addEventListener("swipeRight", () => {
+  console.log("swipe right");
+});
