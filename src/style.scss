@@ -1,0 +1,186 @@
+@import "reset.scss";
+@import "animate.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: rgb(238, 174, 202);
+  background: linear-gradient(
+    90deg,
+    rgba(194, 93, 137, 0.863) 0%,
+    rgba(147, 177, 212, 1) 100%
+  );
+}
+
+@mixin bg-common {
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8.5px);
+  -webkit-backdrop-filter: blur(8.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+@mixin task-common {
+  background: rgba(50, 121, 249, 0.5);
+  box-shadow: 0 0px 0px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4.5px);
+  -webkit-backdrop-filter: blur(4.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+@mixin button-common {
+  background: rgba(50, 121, 249, 0.5);
+  box-shadow: 0 0px 0px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4.5px);
+  -webkit-backdrop-filter: blur(4.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+@mixin toggle-wrap-common {
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(13px);
+  -webkit-backdrop-filter: blur(13px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.container {
+  width: 96vw;
+  margin: 16px auto;
+}
+.header {
+  height: 180px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  &__headline {
+    font-size: 36px;
+    padding-left: 16px;
+    padding-bottom: 16px;
+    display: inline-block;
+  }
+
+  &__p {
+    padding-left: 16px;
+    padding-bottom: 16px;
+  }
+
+  &__text {
+    width: 80%;
+    height: 180px;
+    @include bg-common;
+  }
+
+  &__toggle {
+    width: 16%;
+    height: 96px;
+    text-align: center;
+    color: #fff;
+
+    @include toggle-wrap-common;
+  }
+}
+
+.major {
+  display: flex;
+  gap: 5%;
+  margin: 34px auto;
+
+  &__sidepanel {
+    width: 25%;
+    height: max-content;
+    @include bg-common;
+    animation-duration: 5s;
+
+    &__headline {
+      font-size: 30px;
+      text-align: center;
+    }
+    &__list > li {
+      margin: 16px;
+    }
+  }
+
+  &__task__wrapper {
+    width: 70%;
+    height: 64vh;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__button {
+    width: 100%;
+    line-height: 42px;
+    margin: 6px auto;
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    @include button-common;
+  }
+  &__button:hover {
+    font-weight: 700;
+    color: #000000;
+    background: rgb(34, 193, 195);
+    background: radial-gradient(
+      circle,
+      rgba(34, 193, 195, 1) 2%,
+      rgba(253, 187, 45, 1) 100%
+    );
+  }
+}
+
+.task {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  @include task-common;
+
+  &__content {
+    width: fit-content;
+    overflow-wrap: break-word;
+    padding: 8px;
+  }
+}
+
+.mt-yesno-matte {
+  font-size: 12px;
+  margin: 6px auto;
+}
+.animate__animated.animate__shakeY {
+  --animate-duration: 4s;
+}
+.animate__animated.animate__fadeInDown {
+  animation-delay: 4s;
+  --animate-duration: 0.5s;
+}
+
+.body-dark {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    332deg,
+    rgba(2, 0, 36, 1) 41%,
+    rgba(121, 9, 106, 1) 85%,
+    rgba(0, 71, 85, 1) 100%
+  );
+}
+.header-dark {
+  color: #fff;
+  @include toggle-wrap-common;
+}
+.sidepanel-dark {
+  color: #fff;
+  @include toggle-wrap-common;
+}
+.button-dark {
+  color: #fff;
+}
+.task-text-dark {
+  color: #fff;
+}

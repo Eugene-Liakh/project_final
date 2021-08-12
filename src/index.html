@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/JNKKKK/MoreToggles.css@0.2.1/output/moretoggles.yesno.min.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/favicon_io/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicon_io/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon_io/favicon.ico"
+    />
+    <link rel="manifest" href="/assets/favicon_io/site.webmanifest" />
+
+    <title>QuickDone✓</title>
+  </head>
+  <body id="body">
+    <div class="container">
+      <div class="header">
+        <div id="header" class="header__text">
+          <h1 class="header__headline">QuickDone ✓</h1>
+          <p class="header__p">
+            Plan a few major tasks for today and get them done. We will send you
+            a reminder 🔔 if you get distracted. <br />
+            Remeber that <b>all the tasks will be deleted at midnight</b>, so
+            you can start fresh tomorrow
+          </p>
+        </div>
+        <div class="header__toggle">
+          <div class="mt-yesno-matte">
+            <input id="dark-toggle" type="checkbox" />
+            <label for="dark-toggle"></label>
+          </div>
+          <p class="header__toggle__text">Dark mode 🌙</p>
+        </div>
+      </div>
+      <div class="major">
+        <div
+          id="sidepanel"
+          class="major__sidepanel animate__animated animate__shakeY"
+        >
+          <div class="major__sidepanel-text">
+            <h2 class="major__sidepanel__headline">Tips ☝️</h2>
+            <ul class="major__sidepanel__list">
+              <li>Don't plan much. Try sticking to 4-6 tasks per day 👌</li>
+              <li>Remeber to complete tasks 🤝</li>
+              <li>Pay attention to reminders about unfinished tasks 👋</li>
+            </ul>
+          </div>
+        </div>
+        <div class="major__task__wrapper">
+          <button
+            id="button"
+            class="major__button button animate__animated animate__fadeInDown"
+            onclick="newTask()"
+          >
+            New task
+          </button>
+          <div class="task">
+            <div class="task-checkbox"></div>
+            <div class="task__content">
+              <span class="task-text"
+                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
+                veniam illo dignissimos amet corporis facere sunt quasi nam unde
+                animi at, modi nihil quaerat esse accusantium dolorem voluptatem
+                dolores. Cupiditate totam minima recusandae alias maxime iusto
+                ad quidem accusantium architecto facilis aliquid voluptate at
+                explicabo nesciunt, molestiae dolorum! Cumque molestias
+                exercitationem qui, ad magnam officia perspiciatis corporis
+                fugiat, provident deserunt repellendus adipisci dolores enim
+                blanditiis eaque asperiores ea sapiente nulla! Consequatur,
+                libero accusantium neque officia consequuntur quis debitis qui
+                iusto veritatis voluptatum dolores laborum! Et, nobis? Quaerat
+                pariatur minus temporibus, in voluptatum dolores dicta, dolorum
+                ducimus, expedita quasi ad similique.</span
+              >
+            </div>
+          </div>
+          <!--NEW TASK STARTS HERE-->
+          <div class="task">
+            <div class="task-checkbox"></div>
+            <div class="task__content">
+              <span class="task-text">Lorem ipsum dolor</span>
+            </div>
+          </div>
+          <!--NEW TASK STARTS HERE-->
+          <div class="task">
+            <div class="task-checkbox"></div>
+            <div class="task__content">
+              <span class="task-text"
+                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
+                veniam illo dignissimos amet corporis facere sunt quasi nam unde
+                animi at, modi nihil quaerat esse accusantium dolorem voluptatem
+                dolores. Cupiditate totam minima recusandae alias maxime iusto
+                ad quidem accusantium architecto facilis aliquid voluptate at
+                explicabo nesciunt, molestiae dolorum! Cumque molestias
+                exercitationem qui, ad magnam officia perspiciatis corporis
+                fugiat, provident deserunt repellendus adipisci dolores enim
+                blanditiis eaque asperiores ea sapiente nulla! Consequatur,
+                libero accusantium neque officia consequuntur quis debitis qui
+                iusto veritatis voluptatum dolores laborum! Et, nobis? Quaerat
+                pariatur minus temporibus, in voluptatum dolores dicta, dolorum
+                ducimus, expedita quasi ad similique.</span
+              >
+            </div>
+          </div>
+          <!--NEW TASK STARTS HERE-->
+          <div class="task">
+            <div class="task-checkbox"></div>
+            <div class="task__content">
+              <span class="task-text"
+                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
+                veniam illo dignissimos amet corporis facere sunt quasi nam unde
+                animi at, modi nihil quaerat esse accusantium dolorem voluptatem
+                dolores. Cupiditate totam minima recusandae alias maxime iusto
+                ad quidem accusantium architecto facilis aliquid voluptate at
+                explicabo nesciunt, molestiae dolorum! Cumque molestias
+                exercitationem qui, ad magnam officia perspiciatis corporis
+                fugiat, provident deserunt repellendus adipisci dolores enim
+                blanditiis eaque asperiores ea sapiente nulla! Consequatur,
+                libero accusantium neque officia consequuntur quis debitis qui
+                iusto veritatis voluptatum dolores laborum! Et, nobis? Quaerat
+                pariatur minus temporibus, in voluptatum dolores dicta, dolorum
+                ducimus, expedita quasi ad similique.</span
+              >
+            </div>
+          </div>
+          <!--NEW TASK STARTS HERE-->
+          <div class="task">
+            <div class="task-checkbox"></div>
+            <div class="task__content">
+              <span class="task-text"
+                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
+                veniam illo dignissimos amet corporis facere sunt quasi nam unde
+                animi at, modi nihil quaerat esse accusantium dolorem voluptatem
+                dolores. Cupiditate totam minima recusandae alias maxime iusto
+                ad quidem accusantium architecto facilis aliquid voluptate at
+                explicabo nesciunt, molestiae dolorum! Cumque molestias
+                exercitationem qui, ad magnam officia perspiciatis corporis
+                fugiat, provident deserunt repellendus adipisci dolores enim
+                blanditiis eaque asperiores ea sapiente nulla! Consequatur,
+                libero accusantium neque officia consequuntur quis debitis qui
+                iusto veritatis voluptatum dolores laborum! Et, nobis? Quaerat
+                pariatur minus temporibus, in voluptatum dolores dicta, dolorum
+                ducimus, expedita quasi ad similique.</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer"></div>
+    </div>
+  </body>
+</html>
