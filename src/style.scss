@@ -1,6 +1,53 @@
 @import "reset.scss";
 @import "animate.css";
+@import "/src/assets/font-awesome/css/font-awesome.min.css";
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+@keyframes slide-top {
+  // used for footer-info on mobile
+  0% {
+    transform: translateY(90px);
+  }
+  25% {
+    transform: translateY(60px);
+  }
+  50% {
+    transform: translateY(50px);
+  }
+  75% {
+    transform: translateY(40px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulsate-fwd {
+  // used for new-task on mobile
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes tracking-in-expand {
+  // used for headline
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
 body {
   font-family: "Poppins", sans-serif;
@@ -38,7 +85,7 @@ body {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
-@mixin toggle-wrap-common {
+@mixin toggle-dark {
   background: rgba(0, 0, 0, 0.5);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(13px);
@@ -60,18 +107,18 @@ body {
   &__headline {
     font-size: 36px;
     padding-left: 16px;
-    padding-bottom: 16px;
+    padding-bottom: 10px;
     display: inline-block;
+    animation: tracking-in-expand 1.5s ease-in-out both;
   }
 
   &__p {
-    padding-left: 16px;
-    padding-bottom: 16px;
+    padding: 16px;
   }
 
   &__text {
     width: 80%;
-    height: 180px;
+    height: max-content;
     @include bg-common;
   }
 
@@ -79,9 +126,7 @@ body {
     width: 16%;
     height: 96px;
     text-align: center;
-    color: #fff;
-
-    @include toggle-wrap-common;
+    @include bg-common;
   }
 }
 
@@ -107,7 +152,7 @@ body {
 
   &__task__wrapper {
     width: 70%;
-    height: 64vh;
+    height: 70vh;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
@@ -134,19 +179,47 @@ body {
       rgba(253, 187, 45, 1) 100%
     );
   }
+
+  &__form {
+    display: none;
+    width: 100%;
+    height: 30px;
+  }
+  &__form.active {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__input {
+    border: 1px solid transparent;
+    border-radius: 46px;
+    width: 80%;
+    word-break: break-word;
+  }
+  &-submit {
+    font-weight: 700;
+    border-radius: 46px;
+    border: 1px solid black;
+  }
+  &-submit:hover {
+    background: rgb(22, 215, 173);
+    background: linear-gradient(
+      162deg,
+      rgba(22, 215, 173, 1) 48%,
+      rgba(1, 1, 1, 0.7637429971988796) 100%
+    );
+  }
 }
 
 .task {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
+  display: block;
   @include task-common;
+  overflow-wrap: break-word;
+  padding: 8px;
+}
 
-  &__content {
-    width: fit-content;
-    overflow-wrap: break-word;
-    padding: 8px;
-  }
+.footer {
+  display: none;
 }
 
 .mt-yesno-matte {
@@ -161,6 +234,8 @@ body {
   --animate-duration: 0.5s;
 }
 
+// Styling for Dark mode starts here
+
 .body-dark {
   background: rgb(2, 0, 36);
   background: linear-gradient(
@@ -172,15 +247,124 @@ body {
 }
 .header-dark {
   color: #fff;
-  @include toggle-wrap-common;
+  @include toggle-dark;
 }
 .sidepanel-dark {
   color: #fff;
-  @include toggle-wrap-common;
+  @include toggle-dark;
+}
+.toggle-dark {
+  @include toggle-dark;
+  color: #fff;
 }
 .button-dark {
   color: #fff;
 }
-.task-text-dark {
+.task-dark {
   color: #fff;
+}
+.footer.footer-dark {
+  color: #fff;
+  @include toggle-dark;
+}
+.footer__info.dark {
+  color: #fff;
+  background-color: #0a0a0ae5;
+}
+// Styling for Dark mode ends here
+
+.icon-plus-sign {
+  animation: pulsate-fwd 0.5s ease-in-out infinite both;
+}
+
+@media screen and (max-device-width: 767px) and (orientation: portrait) {
+  .header {
+    width: 100%;
+    height: 60px;
+    text-align: center;
+
+    &__headline {
+      font-size: 24px;
+      animation: tracking-in-expand 1.5s ease-in-out both;
+    }
+
+    &__text {
+      width: 100%;
+      height: 46px;
+      font-size: 14px;
+    }
+
+    &__p {
+      display: none;
+    }
+    &__toggle {
+      display: none;
+    }
+  }
+
+  .major {
+    &__sidepanel {
+      display: none;
+    }
+
+    &__task__wrapper {
+      width: 100%;
+    }
+
+    &__button {
+      display: none;
+    }
+  }
+
+  .footer {
+    position: fixed;
+    display: block;
+    bottom: 4px;
+    width: 96%;
+    height: 66px;
+    border-radius: 10px;
+    margin: 1px auto;
+    @include bg-common;
+
+    &__nav {
+      display: flex;
+      flex-direction: row;
+      height: inherit;
+      width: inherit;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 38px;
+      line-height: 66px;
+    }
+    &__info.active {
+      display: block;
+      animation: slide-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+
+    &__info {
+      display: none;
+      width: 100%;
+      height: 320px;
+      position: absolute;
+      bottom: 70px;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(8.5px);
+      -webkit-backdrop-filter: blur(8.5px);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+
+      &-text {
+        font-size: 14px;
+        width: 80%;
+        margin: 5px auto;
+        text-align: left;
+
+        ul {
+          padding-left: 14px;
+        }
+      }
+    }
+  }
 }
