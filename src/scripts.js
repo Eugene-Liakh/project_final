@@ -51,7 +51,6 @@ function showForm() {
   } else {
     btn.innerText = "New task";
   }
-  console.log("click");
 }
 
 submit.onclick = createTask;
@@ -69,7 +68,6 @@ function createTask() {
     if (data === "") {
       return; // check-up to forbid passing an emty value
     } else {
-      console.log(data);
       let newTask = document.createElement("div");
       newTask.classList.add("task");
       newTask.textContent = data;
@@ -93,19 +91,16 @@ sidePanel.addEventListener("dblclick", (e) => {
   setTimeout((e) => {
     sidePanel.remove();
   }, 400);
-  console.log("Double-click");
 });
 
 //footer navigation functions
 iconInf.addEventListener("click", (e) => {
-  console.log("CLICK");
   footerInf.classList.toggle("active");
 });
 
 moon.addEventListener("click", (e) => {
   let task = document.querySelectorAll(".task");
 
-  console.log("CLICK");
   body.classList.toggle("body-dark");
   header.classList.toggle("header-dark");
   sidePanel.classList.toggle("sidepanel-dark");
@@ -131,7 +126,6 @@ function resetAtMidnight() {
 
   function reset() {
     localStorage.clear();
-    console.log("cleared storage");
   }
 
   setTimeout(function () {
@@ -139,8 +133,9 @@ function resetAtMidnight() {
     resetAtMidnight();
   }, msToMidnight);
 }
+resetAtMidnight();
 
-import * as Hammer from "hammerjs";
+import * as Hammer from "./hammer";
 
 setInterval(function () {
   let allTasks = document.querySelectorAll(".task");
@@ -148,7 +143,6 @@ setInterval(function () {
   allTasks.forEach((e) => {
     let happen = new Hammer(e);
     happen.on("panleft panright", function (ev) {
-      console.log("gesture");
       e.classList.add("completed");
       e.innerHTML = "☑️ COMPLETED";
       setTimeout(function () {

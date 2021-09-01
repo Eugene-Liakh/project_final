@@ -7,6 +7,6 @@ module.exports = merge(common, {
   devtool: "source-map",
   devServer: {
     open: true,
-    contentBase: "./dist",
+    static: "./dist",
   },
 });
