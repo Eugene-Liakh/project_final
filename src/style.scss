@@ -49,13 +49,48 @@
   }
 }
 
+@keyframes sidepanel-delete {
+  10% {
+    transform: translateX(-2vw);
+    opacity: 90;
+  }
+  20% {
+    transform: translateX(-4vw);
+    opacity: 70;
+  }
+  30% {
+    transform: translateX(-6vw);
+    opacity: 50;
+  }
+  50% {
+    transform: translateX(-8vw);
+    opacity: 40;
+  }
+  70% {
+    transform: translateX(-10vw);
+    opacity: 30;
+  }
+  80% {
+    transform: translateX(-12vw);
+    opacity: 20;
+  }
+  90% {
+    transform: translateX(-14vw);
+    opacity: 10;
+  }
+  100% {
+    transform: translateX(-16vw);
+    opacity: 0;
+  }
+}
+
 body {
   font-family: "Poppins", sans-serif;
-  background: rgb(238, 174, 202);
+  background: rgb(207, 149, 164);
   background: linear-gradient(
     90deg,
     rgba(194, 93, 137, 0.863) 0%,
-    rgba(147, 177, 212, 1) 100%
+    rgb(136, 171, 211) 100%
   );
 }
 
@@ -118,13 +153,16 @@ body {
 
   &__text {
     width: 80%;
-    height: max-content;
+    height: fit-content;
+    min-height: 130px;
     @include bg-common;
   }
 
   &__toggle {
-    width: 16%;
-    height: 96px;
+    width: clamp(130px, 16%, 200px);
+    height: 130px;
+    min-height: fit-content;
+    margin-left: 16px;
     text-align: center;
     @include bg-common;
   }
@@ -143,14 +181,20 @@ body {
 
     &__headline {
       font-size: 30px;
-      text-align: center;
+      text-align: left;
+      margin-left: 16px;
+      animation: tracking-in-expand 1.5s ease-in-out both;
     }
     &__list > li {
       margin: 16px;
     }
   }
+  &__sidepanel.delete {
+    animation: sidepanel-delete 0.4s ease-out;
+  }
 
   &__task__wrapper {
+    margin: 6px auto;
     width: 70%;
     height: 70vh;
     overflow-y: scroll;
@@ -194,7 +238,6 @@ body {
     border: 1px solid transparent;
     border-radius: 46px;
     width: 80%;
-    word-break: break-word;
   }
   &-submit {
     font-weight: 700;
@@ -217,14 +260,27 @@ body {
   overflow-wrap: break-word;
   padding: 8px;
 }
+.task.completed {
+  background: rgb(131, 58, 180);
+  background: radial-gradient(
+    circle,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 50%,
+    rgba(252, 176, 69, 1) 100%
+  );
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(14px);
+  color: #fff;
+  text-align: center;
+}
 
 .footer {
   display: none;
 }
 
 .mt-yesno-matte {
-  font-size: 12px;
-  margin: 6px auto;
+  font-size: 10px;
+  margin: 22px auto;
 }
 .animate__animated.animate__shakeY {
   --animate-duration: 4s;
@@ -244,6 +300,7 @@ body {
     rgba(121, 9, 106, 1) 85%,
     rgba(0, 71, 85, 1) 100%
   );
+  color: #fff;
 }
 .header-dark {
   color: #fff;

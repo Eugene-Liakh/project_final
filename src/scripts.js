@@ -1,5 +1,3 @@
-import { SwipeEventListener } from "swipe-event-listener";
-
 const toggle = document.getElementById("dark-toggle");
 const toggleDiv = document.querySelector(".header__toggle");
 const body = document.getElementById("body");
@@ -77,15 +75,25 @@ function createTask() {
       newTask.textContent = data;
       form.insertAdjacentElement("afterend", newTask);
       input.value = "";
+
+      function generateRandomInteger(max) {
+        return Math.floor(Math.random() * max) + 1;
+      }
+
+      let storageId = generateRandomInteger(20);
+      let storageValue = data;
+
+      localStorage.setItem("id:" + storageId, "text:" + storageValue);
     }
   });
 }
 
-function removeObj() {
-  console.log("1234567");
-}
 sidePanel.addEventListener("dblclick", (e) => {
-  console.log("123456");
+  sidePanel.classList.add("delete");
+  setTimeout((e) => {
+    sidePanel.remove();
+  }, 400);
+  console.log("Double-click");
 });
 
 //footer navigation functions
@@ -109,32 +117,48 @@ moon.addEventListener("click", (e) => {
   footerInf.classList.toggle("dark");
 });
 
-// function newTask() {
-//   let newTask = document.createElement("div");
-//   newTask.className = "task";
-//   newTask.innerHTML =
-//     "<div><span>Lorem ipsum dolor sit amet consectetur adi</span></div>";
+function resetAtMidnight() {
+  let now = new Date();
+  let night = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() + 1, // the next day, ...
+    0,
+    0,
+    0 // ...at 00:00:00 hours
+  );
+  let msToMidnight = night.getTime() - now.getTime();
 
-//   btn.insertAdjacentElement("afterend", newTask);
-// }
+  function reset() {
+    localStorage.clear();
+    console.log("cleared storage");
+  }
 
-// swipe functions
+  setTimeout(function () {
+    reset();
+    resetAtMidnight();
+  }, msToMidnight);
+}
 
-// const { swipeArea, updateOptions } = SwipeEventListener({
-//   swipeArea: document.querySelector(".major__task__wrapper"),
-// });
+import * as Hammer from "hammerjs";
 
-// swipeArea.addEventListener("swipeDown", () => {
-//   console.log("swipe down");
-// });
-// swipeArea.addEventListener("swipeUp", () => {
-//   console.log("swipe up");
-// });
+setInterval(function () {
+  let allTasks = document.querySelectorAll(".task");
 
-// swipeArea.addEventListener("swipeLeft", () => {
-//   console.log("swipe left");
-// });
+  allTasks.forEach((e) => {
+    let happen = new Hammer(e);
+    happen.on("panleft panright", function (ev) {
+      console.log("gesture");
+      e.classList.add("completed");
+      e.innerHTML = "☑️ COMPLETED";
+      setTimeout(function () {
+        e.classList.add("animate__animated");
+        e.classList.add("animate__bounceOutRight");
+      }, 600);
 
-// swipeArea.addEventListener("swipeRight", () => {
-//   console.log("swipe right");
-// });
+      setTimeout(function () {
+        e.remove();
+      }, 1800);
+    });
+  });
+}, 2000);

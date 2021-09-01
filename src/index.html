@@ -42,10 +42,7 @@
         <div id="header" class="header__text">
           <h1 class="header__headline">QuickDone ✓</h1>
           <p class="header__p">
-            Plan a few major tasks for today and get them done. We will send you
-            a reminder 🔔 if you get distracted. <br />
-            Remeber that <b>all the tasks will be deleted at midnight</b>, so
-            you can start fresh tomorrow
+            Plan a few major tasks for today and get them done by midnight!
           </p>
         </div>
         <div class="header__toggle">
@@ -53,7 +50,7 @@
             <input id="dark-toggle" type="checkbox" />
             <label for="dark-toggle"></label>
           </div>
-          <p class="header__toggle__text">Dark mode 🌙</p>
+          <p class="header__toggle__text">🌙Dark mode</p>
         </div>
       </div>
       <div class="major">
@@ -64,9 +61,14 @@
           <div class="major__sidepanel-text">
             <h2 class="major__sidepanel__headline">Tips ☝️</h2>
             <ul class="major__sidepanel__list">
-              <li>Don't plan much. Try sticking to 4-6 tasks per day 👌</li>
+              <li>Don't plan much. Stick to 4-6 tasks per day 👌</li>
               <li>Remeber to complete tasks 🤝</li>
-              <li>Pay attention to reminders about unfinished tasks 👋</li>
+            </ul>
+            <h2 class="major__sidepanel__headline">How-to ❓</h2>
+            <ul class="major__sidepanel__list">
+              <li>All task are deleted at midnight</li>
+              <li>Swipe tasks to complete them</li>
+              <li>Double-click this panel to hide it</li>
             </ul>
           </div>
         </div>
@@ -84,10 +86,11 @@
           >
             <input
               type="text"
-              placeholder="write your task"
-              class="major__input"
+              placeholder=" write your task"
               id="input"
+              class="major__input"
             />
+
             <button
               id="submit"
               type="submit"
@@ -98,7 +101,7 @@
               <i class="icon-chevron-sign-right"></i>
             </button>
           </form>
-          <div class="task" ondblclick="removeObj()">
+          <div class="task"">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad veniam
             illo dignissimos amet corporis facere sunt quasi nam unde animi at,
             modi nihil quaerat esse accusantium dolorem voluptatem dolores.
