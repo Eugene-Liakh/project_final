@@ -83,15 +83,31 @@
     opacity: 0;
   }
 }
+// for loader
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
 
-body {
-  font-family: "Poppins", sans-serif;
-  background: rgb(207, 149, 164);
-  background: linear-gradient(
-    90deg,
-    rgba(194, 93, 137, 0.863) 0%,
-    rgb(136, 171, 211) 100%
-  );
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes logo-spin {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 @mixin bg-common {
@@ -127,6 +143,52 @@ body {
   -webkit-backdrop-filter: blur(13px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: rgb(207, 149, 164);
+  background: linear-gradient(
+    90deg,
+    rgba(194, 93, 137, 0.863) 0%,
+    rgb(136, 171, 211) 100%
+  );
+}
+
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include bg-common;
+  height: 100vh;
+  width: 100vw;
+}
+.loader-logo {
+  padding: 0;
+  margin: 0;
+  display: block;
+  animation: logo-spin 2s linear infinite;
+  height: 120px;
+  width: 120px;
+  font-size: 44px;
+  line-height: 120px;
+  text-align: center;
+}
+
+.loader {
+  z-index: 99;
+  box-sizing: content-box;
+  width: 120px;
+  height: 120px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid rgba(68, 199, 171, 0.877);
+  border-bottom: 16px solid rgb(206, 94, 187);
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+.loader-wrapper.hidden {
+  display: none;
 }
 
 .container {
@@ -235,9 +297,17 @@ body {
   }
 
   &__input {
-    border: 1px solid transparent;
-    border-radius: 46px;
+    margin-left: 2px;
+    border: 2px solid transparent;
+    border-radius: 4px;
     width: 80%;
+  }
+  &__input:focus {
+    color: rgba(50, 120, 249, 0.966);
+    font-style: italic;
+    font-weight: 600;
+    outline: none;
+    border: 2px solid rgba(228, 137, 18, 0.808);
   }
   &-submit {
     font-weight: 700;
@@ -334,7 +404,7 @@ body {
   animation: pulsate-fwd 0.5s ease-in-out infinite both;
 }
 
-@media screen and (max-device-width: 767px) and (orientation: portrait) {
+@media screen and (min-device-width: 280px) and (max-device-width: 479px) and (orientation: portrait) {
   .header {
     width: 100%;
     height: 60px;

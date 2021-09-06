@@ -3,6 +3,8 @@ const toggleDiv = document.querySelector(".header__toggle");
 const body = document.getElementById("body");
 const header = document.getElementById("header");
 const sidePanel = document.getElementById("sidepanel");
+const locallyStored = { ...localStorage };
+let savedIds = Object.keys(locallyStored);
 
 const btn = document.getElementById("button");
 const form = document.getElementById("form");
@@ -43,13 +45,24 @@ toggle.addEventListener("change", (event) => {
 
 btn.onclick = showForm;
 iconPlus.onclick = showForm;
+form.addEventListener("keyup", function (e) {
+  if (
+    (e.key == "Escape" || e.key == "Esc") &&
+    form.classList.contains("active")
+  ) {
+    showForm();
+  }
+});
 
 function showForm() {
   form.classList.toggle("active");
+
   if (btn.innerText === "New task") {
     btn.innerText = "Hide input";
+    input.focus();
   } else {
     btn.innerText = "New task";
+    input.blur();
   }
 }
 
@@ -81,7 +94,8 @@ function createTask() {
       let storageId = generateRandomInteger(20);
       let storageValue = data;
 
-      localStorage.setItem("id:" + storageId, "text:" + storageValue);
+      newTask.setAttribute("task-id", storageId);
+      localStorage.setItem(storageId, storageValue);
     }
   });
 }
@@ -145,14 +159,44 @@ setInterval(function () {
     happen.on("panleft panright", function (ev) {
       e.classList.add("completed");
       e.innerHTML = "☑️ COMPLETED";
+      let toBeDeleted = e.getAttribute("task-id");
+
       setTimeout(function () {
         e.classList.add("animate__animated");
         e.classList.add("animate__bounceOutRight");
       }, 600);
 
       setTimeout(function () {
+        localStorage.removeItem(toBeDeleted);
         e.remove();
       }, 1800);
     });
   });
 }, 2000);
+
+//for loader
+
+window.addEventListener("load", function () {
+  const loader = document.querySelector(".loader-wrapper");
+  loader.classList.add("hidden");
+});
+
+function deleteAllTasks() {
+  let allTasks = document.querySelectorAll(".task");
+  allTasks.forEach((e) => {
+    e.remove();
+  });
+}
+deleteAllTasks();
+
+function restoreItems(e) {
+  let newDiv = document.createElement("div");
+  newDiv.classList.add("task");
+  newDiv.setAttribute("task-id", e);
+  newDiv.innerHTML = localStorage.getItem(e);
+  form.insertAdjacentElement("afterend", newDiv);
+}
+
+savedIds.forEach((e) => {
+  restoreItems(e);
+});

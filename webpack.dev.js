@@ -3,6 +3,15 @@ const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
 
 module.exports = merge(common, {
+  //...
+  devServer: {
+    client: {
+      overlay: {
+        errors: false,
+        warnings: false,
+      },
+    },
+  },
   mode: "development",
   devtool: "source-map",
   devServer: {
