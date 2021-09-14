@@ -138,12 +138,10 @@ function resetAtMidnight() {
   );
   let msToMidnight = night.getTime() - now.getTime();
 
-  function reset() {
-    localStorage.clear();
-  }
+  console.log((msToMidnight / 1000) * 60);
 
   setTimeout(function () {
-    reset();
+    localStorage.clear();
     resetAtMidnight();
   }, msToMidnight);
 }
@@ -200,3 +198,5 @@ function restoreItems(e) {
 savedIds.forEach((e) => {
   restoreItems(e);
 });
+
+const now = new Date().getDate();
