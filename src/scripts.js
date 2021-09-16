@@ -195,7 +195,11 @@ savedIds.forEach((e) => {
 
 function detectDarkMode() {
   if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    toggle.click();
+    if (window.matchMedia("(orientation: portrait)").matches) {
+      moon.click();
+    } else {
+      toggle.click();
+    }
   }
 }
 detectDarkMode();
