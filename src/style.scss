@@ -305,7 +305,7 @@ body {
     margin-left: 2px;
     border: 2px solid transparent;
     border-radius: 4px;
-    width: 80%;
+    width: 75%;
   }
   &__input:focus {
     color: rgba(50, 120, 249, 0.966);
@@ -316,8 +316,10 @@ body {
   }
   &-submit {
     font-weight: 700;
-    border-radius: 46px;
+    border-radius: 4px;
     border: 1px solid black;
+    min-width: fit-content;
+    width: Max(20%, 60px);
   }
   &-submit:hover {
     background: rgb(22, 215, 173);

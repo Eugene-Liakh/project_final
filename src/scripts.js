@@ -200,3 +200,10 @@ function restoreItems(e) {
 savedIds.forEach((e) => {
   restoreItems(e);
 });
+
+function detectDarkMode() {
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    toggle.click();
+  }
+}
+detectDarkMode();
