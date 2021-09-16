@@ -207,5 +207,3 @@ function detectDarkMode() {
   }
 }
 detectDarkMode();
-
-console.log("TEST FOR DEVELOPMENT BRANCH");
