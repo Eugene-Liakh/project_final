@@ -199,4 +199,10 @@ savedIds.forEach((e) => {
   restoreItems(e);
 });
 
-const now = new Date().getDate();
+
+function detectDarkMode() {
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    toggle.click();
+  }
+}
+detectDarkMode();
