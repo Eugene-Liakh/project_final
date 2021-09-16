@@ -87,11 +87,12 @@ function createTask() {
       form.insertAdjacentElement("afterend", newTask);
       input.value = "";
 
-      function generateRandomInteger(max) {
-        return Math.floor(Math.random() * max) + 1;
+      function generateTimeStamp() {
+        let now = new Date();
+        return now.getTime();
       }
 
-      let storageId = generateRandomInteger(20);
+      let storageId = generateTimeStamp();
       let storageValue = data;
 
       newTask.setAttribute("task-id", storageId);
@@ -126,27 +127,6 @@ moon.addEventListener("click", (e) => {
   footerInf.classList.toggle("dark");
 });
 
-function resetAtMidnight() {
-  let now = new Date();
-  let night = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate() + 1, // the next day, ...
-    0,
-    0,
-    0 // ...at 00:00:00 hours
-  );
-  let msToMidnight = night.getTime() - now.getTime();
-
-  console.log((msToMidnight / 1000) * 60);
-
-  setTimeout(function () {
-    localStorage.clear();
-    resetAtMidnight();
-  }, msToMidnight);
-}
-resetAtMidnight();
-
 import * as Hammer from "./hammer";
 
 setInterval(function () {
@@ -179,6 +159,10 @@ window.addEventListener("load", function () {
   loader.classList.add("hidden");
 });
 
+// ON PAGE LOAD:
+// 1) the script deletes all the tasks displayed in DOM
+// 2) then another script checks their id's and if they equal yesterday's timestamp the task gets deleted.
+
 function deleteAllTasks() {
   let allTasks = document.querySelectorAll(".task");
   allTasks.forEach((e) => {
@@ -188,11 +172,20 @@ function deleteAllTasks() {
 deleteAllTasks();
 
 function restoreItems(e) {
-  let newDiv = document.createElement("div");
-  newDiv.classList.add("task");
-  newDiv.setAttribute("task-id", e);
-  newDiv.innerHTML = localStorage.getItem(e);
-  form.insertAdjacentElement("afterend", newDiv);
+  let now = new Date().getDate();
+  let num = new Number(e);
+  let timeStamp = new Date(num).getDate();
+  let daysPassed = now - timeStamp;
+
+  if (daysPassed == 0) {
+    let newDiv = document.createElement("div");
+    newDiv.classList.add("task");
+    newDiv.setAttribute("task-id", e);
+    newDiv.innerHTML = localStorage.getItem(e);
+    form.insertAdjacentElement("afterend", newDiv);
+  } else {
+    localStorage.removeItem(e);
+  }
 }
 
 savedIds.forEach((e) => {
