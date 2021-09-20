@@ -3,3 +3,5 @@
 /src/assets/
 /.DS_Store
 /.firebase
+localhost-key.pem
+localhost.pem
