@@ -11,6 +11,10 @@ const form = document.getElementById("form");
 const input = document.getElementById("input");
 
 const submit = document.getElementById("submit");
+const counterEl = document.querySelector(".header__counter");
+const hours = document.getElementById("hours");
+const minutes = document.getElementById("minutes");
+const seconds = document.getElementById("seconds");
 
 const iconInf = document.getElementById("info");
 const iconPlus = document.getElementById("plus");
@@ -26,6 +30,7 @@ toggle.addEventListener("change", (event) => {
     body.classList.add("body-dark");
     toggleDiv.classList.add("toggle-dark");
     header.classList.add("header-dark");
+    counterEl.classList.add("header__counter-dark");
     sidePanel.classList.add("sidepanel-dark");
     btn.classList.add("button-dark");
     task.forEach((element) => {
@@ -35,6 +40,7 @@ toggle.addEventListener("change", (event) => {
     body.classList.remove("body-dark");
     toggleDiv.classList.remove("toggle-dark");
     header.classList.remove("header-dark");
+    counterEl.classList.remove("header__counter-dark");
     sidePanel.classList.remove("sidepanel-dark");
     btn.classList.remove("button-dark");
     task.forEach((element) => {
@@ -118,6 +124,7 @@ moon.addEventListener("click", (e) => {
 
   body.classList.toggle("body-dark");
   header.classList.toggle("header-dark");
+
   sidePanel.classList.toggle("sidepanel-dark");
   btn.classList.toggle("button-dark");
   task.forEach((element) => {
@@ -192,7 +199,6 @@ savedIds.forEach((e) => {
   restoreItems(e);
 });
 
-
 function detectDarkMode() {
   if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
     if (window.matchMedia("(orientation: portrait)").matches) {
@@ -203,3 +209,35 @@ function detectDarkMode() {
   }
 }
 detectDarkMode();
+
+function countDownToMidnight() {
+  setInterval(function () {
+    let now = new Date();
+    let nextDay = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate() + 1
+    );
+    let a = nextDay.getTime();
+    let b = now.getTime();
+
+    let distance = a - b;
+
+    console.log(now);
+    console.log(nextDay);
+    console.log(distance);
+
+    let hoursLeft = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    let minutesLeft = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let secondsLeft = Math.floor((distance % (1000 * 60)) / 1000);
+    console.log(hoursLeft);
+    console.log(minutesLeft);
+    console.log(secondsLeft);
+    hours.innerHTML = hoursLeft;
+    minutes.innerHTML = minutesLeft;
+    seconds.innerHTML = secondsLeft;
+  }, 1000);
+}
+countDownToMidnight();

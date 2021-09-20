@@ -2,4 +2,7 @@
 /node_modules/
 /src/assets/
 /.DS_Store
-/.firebase
+.firebase
+firebaserc
+localhost-key.pem
+localhost.pem
