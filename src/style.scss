@@ -199,13 +199,16 @@ body {
 .container {
   width: 96vw;
   margin: 16px auto;
+  position: relative;
 }
 .header {
-  height: 180px;
+  height: 220px;
   width: 100%;
   display: flex;
-
+  // position: fixed;
+  
   justify-content: space-between;
+  
 
   &__headline {
     flex-basis: 55%;
@@ -243,7 +246,6 @@ body {
 
   &__counter > h3 {
     font-size: 1.5rem;
-    color: hsl(0, 76%, 58%);
   }
   &__counter::before {
     content: "|";
@@ -287,6 +289,7 @@ body {
   display: flex;
   gap: 5%;
   margin: 34px auto;
+  
 
   &__sidepanel {
     width: 25%;
