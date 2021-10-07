@@ -287,7 +287,7 @@ body {
     @include bg-common;
     height: fit-content;
     margin: 16px 0;
-    padding: 16px;
+    padding: 8px 16px 16px 16px;
     flex: 1;
 
     &-headline {
@@ -353,6 +353,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    overflow: auto;
   }
 
   &__button {
