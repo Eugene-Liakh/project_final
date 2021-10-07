@@ -2,6 +2,7 @@ const toggle = document.getElementById("dark-toggle");
 const toggleDiv = document.querySelector(".header__toggle");
 const body = document.getElementById("body");
 const header = document.getElementById("header");
+const weatherDiv = document.querySelector(".header__weather");
 const sidePanel = document.getElementById("sidepanel");
 const locallyStored = { ...localStorage };
 let savedIds = Object.keys(locallyStored);
@@ -30,6 +31,7 @@ toggle.addEventListener("change", (event) => {
     body.classList.add("body-dark");
     toggleDiv.classList.add("toggle-dark");
     header.classList.add("header-dark");
+    weatherDiv.classList.add("header__weather-dark");
     counterEl.classList.add("header__counter-dark");
     sidePanel.classList.add("sidepanel-dark");
     btn.classList.add("button-dark");
@@ -40,6 +42,7 @@ toggle.addEventListener("change", (event) => {
     body.classList.remove("body-dark");
     toggleDiv.classList.remove("toggle-dark");
     header.classList.remove("header-dark");
+    weatherDiv.classList.remove("header__weather-dark");
     counterEl.classList.remove("header__counter-dark");
     sidePanel.classList.remove("sidepanel-dark");
     btn.classList.remove("button-dark");
@@ -124,7 +127,7 @@ moon.addEventListener("click", (e) => {
 
   body.classList.toggle("body-dark");
   header.classList.toggle("header-dark");
-
+  
   sidePanel.classList.toggle("sidepanel-dark");
   btn.classList.toggle("button-dark");
   task.forEach((element) => {
@@ -222,22 +225,58 @@ function countDownToMidnight() {
     let b = now.getTime();
 
     let distance = a - b;
-
-    console.log(now);
-    console.log(nextDay);
-    console.log(distance);
-
     let hoursLeft = Math.floor(
       (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
     );
     let minutesLeft = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     let secondsLeft = Math.floor((distance % (1000 * 60)) / 1000);
-    console.log(hoursLeft);
-    console.log(minutesLeft);
-    console.log(secondsLeft);
+   
     hours.innerHTML = hoursLeft;
     minutes.innerHTML = minutesLeft;
     seconds.innerHTML = secondsLeft;
   }, 1000);
 }
 countDownToMidnight();
+
+const urlAPI = "https://api.openweathermap.org/data/2.5/weather?q=Kyiv,ua&units=metric&APPID=ad6fc2e1402ff5e35ff23a47119b7376";
+
+async function getWeather(a) {
+  let response = await fetch(a);
+  let data = await response.json();
+
+  try {
+    // Here we parse temperature, sunrise and sunset time and location from API response
+    const { temp_max: temperature, } = data.main;
+    const { sunrise: sunriseTime, sunset: sunsetTime } = data.sys;
+    const name = data.name;
+    const windSpeed = data.wind.speed;
+    const iconAPI = data.weather[0].icon; 
+
+    //convert the UTC time from API response to JS-compatible timing
+    let convertedSunriseTime = new Date(sunriseTime * 1000);
+    let convertedsunsetTime = new Date(sunsetTime * 1000);
+    
+    // Weather elements
+    const weatherSlot = document.getElementById("weatherSlot");
+    const location = document.getElementById("location");
+    const description = document.getElementById("description");
+    const sunrise = document.getElementById("sunrise");
+    const sunset = document.getElementById("sunset");
+    const wind = document.getElementById("wind");
+    const weatherIcon = document.getElementById("weather-icon");
+
+    weatherSlot.innerHTML = "🌡Max.temp: " + Math.round(temperature) + "℃" + " |";
+    location.innerHTML = " " + name;
+    description.innerHTML = data.weather[0].description;
+
+    sunrise.innerHTML = "☀️Sunrise: " + convertedSunriseTime.toLocaleTimeString() + " |";
+    sunset.innerHTML = "☀️Sunset: " + convertedsunsetTime.toLocaleTimeString() + " |";
+    wind.innerHTML = "💨Windspeed: " + windSpeed + "m/sec";
+    weatherIcon.src = `http://openweathermap.org/img/wn/${iconAPI}.png`;
+  } catch (error) {
+    console.log("Houston, we have a problem...(with fetching weather API)");
+    console.error(error);
+  }
+}
+
+getWeather(urlAPI)
