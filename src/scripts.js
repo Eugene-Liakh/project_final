@@ -245,7 +245,7 @@ async function getWeather(a) {
   let data = await response.json();
 
   try {
-    // Here we parse temperature, sunrise and sunset time and location from API response
+    // Here we parse temperature, sunrise, sunset time, location, and wind from API response
     const { temp_max: temperature, } = data.main;
     const { sunrise: sunriseTime, sunset: sunsetTime } = data.sys;
     const name = data.name;
