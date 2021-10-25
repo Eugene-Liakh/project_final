@@ -127,7 +127,7 @@ moon.addEventListener("click", (e) => {
 
   body.classList.toggle("body-dark");
   header.classList.toggle("header-dark");
-  
+
   sidePanel.classList.toggle("sidepanel-dark");
   btn.classList.toggle("button-dark");
   task.forEach((element) => {
@@ -230,7 +230,7 @@ function countDownToMidnight() {
     );
     let minutesLeft = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     let secondsLeft = Math.floor((distance % (1000 * 60)) / 1000);
-   
+
     hours.innerHTML = hoursLeft;
     minutes.innerHTML = minutesLeft;
     seconds.innerHTML = secondsLeft;
@@ -238,7 +238,11 @@ function countDownToMidnight() {
 }
 countDownToMidnight();
 
-const urlAPI = "https://api.openweathermap.org/data/2.5/weather?q=Kyiv,ua&units=metric&APPID=ad6fc2e1402ff5e35ff23a47119b7376";
+console.log(config);
+
+const urlAPI =
+  "https://api.openweathermap.org/data/2.5/weather?q=Kyiv,ua&units=metric&APPID=" +
+  `${config.key}`;
 
 async function getWeather(a) {
   let response = await fetch(a);
@@ -246,16 +250,16 @@ async function getWeather(a) {
 
   try {
     // Here we parse temperature, sunrise, sunset time, location, and wind from API response
-    const { temp_max: temperature, } = data.main;
+    const { temp_max: temperature } = data.main;
     const { sunrise: sunriseTime, sunset: sunsetTime } = data.sys;
     const name = data.name;
     const windSpeed = data.wind.speed;
-    const iconAPI = data.weather[0].icon; 
+    const iconAPI = data.weather[0].icon;
 
     //convert the UTC time from API response to JS-compatible timing
     let convertedSunriseTime = new Date(sunriseTime * 1000);
     let convertedsunsetTime = new Date(sunsetTime * 1000);
-    
+
     // Weather elements
     const weatherSlot = document.getElementById("weatherSlot");
     const location = document.getElementById("location");
@@ -265,12 +269,15 @@ async function getWeather(a) {
     const wind = document.getElementById("wind");
     const weatherIcon = document.getElementById("weather-icon");
 
-    weatherSlot.innerHTML = "🌡Max.temp: " + Math.round(temperature) + "℃" + " |";
+    weatherSlot.innerHTML =
+      "🌡Max.temp: " + Math.round(temperature) + "℃" + " |";
     location.innerHTML = " " + name;
     description.innerHTML = data.weather[0].description;
 
-    sunrise.innerHTML = "☀️Sunrise: " + convertedSunriseTime.toLocaleTimeString() + " |";
-    sunset.innerHTML = "☀️Sunset: " + convertedsunsetTime.toLocaleTimeString() + " |";
+    sunrise.innerHTML =
+      "☀️Sunrise: " + convertedSunriseTime.toLocaleTimeString() + " |";
+    sunset.innerHTML =
+      "☀️Sunset: " + convertedsunsetTime.toLocaleTimeString() + " |";
     wind.innerHTML = "💨Windspeed: " + windSpeed + "m/sec";
     weatherIcon.src = `http://openweathermap.org/img/wn/${iconAPI}.png`;
   } catch (error) {
@@ -279,4 +286,4 @@ async function getWeather(a) {
   }
 }
 
-getWeather(urlAPI)
+getWeather(urlAPI);

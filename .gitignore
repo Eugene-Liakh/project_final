@@ -6,3 +6,4 @@
 firebaserc
 localhost-key.pem
 localhost.pem
+/src/config.js
