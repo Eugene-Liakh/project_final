@@ -1,6 +1,6 @@
 # project_final
 
-### It is a diploma-project for the front-end course by Web Academy. 
+### It is my pet-project. That's a simple to-do app
 
 #### 🔗 Here is the link for the website: https://quickdone-tasker.web.app/
 
